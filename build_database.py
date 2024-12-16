@@ -49,7 +49,7 @@ def build_database(repo_path):
         body = fp.read().strip()
         path = str(filepath.relative_to(root))
         slug = filepath.stem
-        url = "https://gvoserver1.com/jnellis/Today-I-Learned/blob/main/{}".format(path)
+        url = "https://git.gvoserver1.com/jnellis/Today-I-Learned/blob/main/{}".format(path)
         # Do we need to render the markdown?
         path_slug = path.replace("/", "_")
         try:
