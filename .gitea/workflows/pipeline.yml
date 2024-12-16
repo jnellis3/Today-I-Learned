@@ -1,0 +1,16 @@
+name: Fetch System Configuration
+
+on:
+  push:
+    
+jobs:
+  build:
+    name: build
+    runs-on: desktop
+    steps:
+    - name: Setup Machine
+      continue-on-error: true
+      run: |
+        pwd
+        su - jacob
+        pwd 
