@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: build
-    runs-on: desktop
+    runs-on: ubuntu
     steps:
     - name: Check-Out-Repo
       uses: actions/checkout@v4
