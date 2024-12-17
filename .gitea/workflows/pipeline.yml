@@ -35,6 +35,7 @@ jobs:
     - name: Update README
       run: |
         cd main
+        source ./.venv/bin/activate
         python3 update_readme.py > README.md
         git config user.email "jacob.stephen.nellis@gmail.com"
         git config user.name "README-Updater-BOT"
