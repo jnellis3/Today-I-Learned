@@ -1,4 +1,4 @@
-# My First Post
+# My First TIL
 
 Greetings,
 
