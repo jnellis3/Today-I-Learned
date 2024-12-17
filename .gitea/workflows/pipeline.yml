@@ -22,7 +22,6 @@ jobs:
         source ./.venv/bin/activate
         pip install -r requirements.txt
         python3 build_database.py
-        scp -i /home/jacob/.ssh/master.pem -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
 
     - name: Push to Server
       run: |
