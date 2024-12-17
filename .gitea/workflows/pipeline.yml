@@ -5,18 +5,34 @@ on:
     
 jobs:
   build:
-    name: build
+    name: Check Out Repo
     runs-on: ubuntu-latest
     steps:
     - name: Check-Out-Repo
       uses: actions/checkout@v4
 
-    - name: Setup Machine
+    - name: Build Database
       continue-on-error: true
       run: |
-        ls
         python3 -m venv .venv
         source ./.venv/bin/activate
         pip install -r requirements.txt
         python3 build_database.py
         scp -i /home/jacob/.ssh/master.pem -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
+
+    - name: Push to Server
+      run: |
+        echo "SSH_KEY" > key
+        chmod 600 key
+        scp -i ./key -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+
+    - name: Update README
+      run: |
+        python3 update_readme.py > README.md
+        git config user.email "jacob.stephen.nellis@gmail.com"
+        git config user.name "README-Updater-BOT"
+        git add README.md
+        git commit -m 'AUTOMATED: Update README'
+        git push
