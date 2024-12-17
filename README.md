@@ -6,4 +6,8 @@
 ## github-actions
 
 * [Checkout a Repo with Full Branch History](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/checkout_full.md) - 2024-12-16
+
+## python
+
+* [Forthright: Seemingly call Server Functions Client Side](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/python/forthright.md) - 2024-12-16
 <!-- index ends -->
