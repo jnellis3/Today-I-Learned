@@ -14,10 +14,7 @@ jobs:
     - name: Setup Machine
       continue-on-error: true
       run: |
-        su - jacob
         ls
-        pwd
-        cd Today-I-Learned
         python3 -m venv .venv
         source ./.venv/bin/activate
         pip install -r requirements.txt
