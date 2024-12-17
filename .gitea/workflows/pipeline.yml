@@ -14,6 +14,7 @@ jobs:
     - name: Build Database
       continue-on-error: true
       run: |
+        git pull
         python3 -m venv .venv
         source ./.venv/bin/activate
         pip install -r requirements.txt
@@ -22,7 +23,7 @@ jobs:
 
     - name: Push to Server
       run: |
-        echo "SSH_KEY" > key
+        echo "$SSH_KEY" > key
         chmod 600 key
         scp -i ./key -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
       env:
