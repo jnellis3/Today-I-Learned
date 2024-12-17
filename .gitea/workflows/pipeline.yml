@@ -25,6 +25,7 @@ jobs:
 
     - name: Push to Server
       run: |
+        cd main
         echo "$SSH_KEY" > key
         chmod 600 key
         scp -i ./key -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
@@ -33,6 +34,7 @@ jobs:
 
     - name: Update README
       run: |
+        cd main
         python3 update_readme.py > README.md
         git config user.email "jacob.stephen.nellis@gmail.com"
         git config user.name "README-Updater-BOT"
