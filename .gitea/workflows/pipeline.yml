@@ -8,11 +8,15 @@ jobs:
     name: build
     runs-on: desktop
     steps:
+    - name: Check-Out-Repo
+      uses: actions/checkout@v4
+
     - name: Setup Machine
       continue-on-error: true
       run: |
         su - jacob
-        git clone https://git.gvoserver1.com/jnellis/Today-I-Learned.git
+        ls
+        pwd
         cd Today-I-Learned
         python3 -m venv .venv
         source ./.venv/bin/activate
