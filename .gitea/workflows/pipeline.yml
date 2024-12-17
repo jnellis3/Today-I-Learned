@@ -11,6 +11,11 @@ jobs:
     - name: Setup Machine
       continue-on-error: true
       run: |
-        pwd
         su - jacob
-        pwd 
+        git clone https://git.gvoserver1.com/jnellis/Today-I-Learned.git
+        cd Today-I-Learned
+        python3 -m venv .venv
+        source ./.venv/bin/activate
+        pip install -r requirements.txt
+        python3 build_database.py
+        scp -i /home/jacob/.ssh/master.pem -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
