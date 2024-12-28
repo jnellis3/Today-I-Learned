@@ -1,12 +1,3 @@
-<HTML><HEAD>
-	
-	<TITLE>X-Y Plot</TITLE>
-	<META NAME="VIEWPORT" CONTENT="width=device-width">
-	<META NAME="KEYWORDS" CONTENT="Add legend item;Area plot;auto color and symbol;automatic update;connect last to first point;error bars;uncertainty display;grid lines;Integral table run number;plot axis format;plot axis scaling;plot symbol;plotting multiple Y-axis variables;Spline fit;X-Y plot;">
-	<META NAME="AUTHOR" CONTENT="2023 S.A. Klein">
-	<META NAME="GENERATOR" CONTENT="HelpScribble 8.3.2">
-	<STYLE> span { display: inline-block; }</STYLE>
-</HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
 <P><FONT FACE="Arial, helvetica, sans-serif" SIZE="2">
 <A HREF="cnt.htm" TARGET="cnt">Contents</A>
@@ -52,4 +43,4 @@
 <P STYLE="margin-top:0;margin-bottom:0;"><SPAN STYLE="width: 72pt"><FONT FACE="Arial, helvetica, sans-serif" SIZE="2"> &nbsp;</FONT></SPAN><FONT FACE="Arial, helvetica, sans-serif" SIZE="2"><A HREF="hs615.htm">Polar Plot</A></FONT><FONT FACE="Arial, helvetica, sans-serif" COLOR="#800000" SIZE="2"><STRIKE>
 </STRIKE></FONT>
 </P>
-</BODY></HTML>
+</BODY>
