@@ -15,5 +15,5 @@
 ## tailscale
 
 * [Personal VPN with Tailscale](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/tailscale/tailscale_intro.md) - 2024-12-27
-* [<HTML><HEAD>](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/tailscale/test.md) - 2024-12-28
+* [<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/tailscale/test.md) - 2024-12-28
 <!-- index ends -->
