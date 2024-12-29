@@ -25,12 +25,7 @@ jobs:
 
     - name: Push to Server
       run: |
-        cd main
-        echo "$SSH_KEY" > key
-        chmod 600 key
-        scp -i ./key -o StrictHostKeyChecking=no ./tils.db ubuntu@3.146.120.38:/home/ubuntu/Today_I_Learned/src/
-      env:
-        SSH_KEY: ${{ secrets.SSH_KEY }}
+        scp StrictHostKeyChecking=no ./tils.db jacob@mini:/home/jacob/containers_enabled/Today_I_Learned/src/
 
     - name: Update README
       run: |
