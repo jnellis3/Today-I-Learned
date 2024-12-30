@@ -25,6 +25,8 @@ jobs:
 
     - name: Push to Server
       run: |
+        curl mini.tailb54fb2.ts.net
+        ssh jacob@mini.tailb54fb2.ts.net
         scp StrictHostKeyChecking=no ./tils.db jacob@mini.tailb54fb2.ts.net:/home/jacob/containers_enabled/Today_I_Learned/src/
 
     - name: Update README
