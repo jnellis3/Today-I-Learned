@@ -11,6 +11,7 @@
 
 * [Forthright: Seemingly call Server Functions Client Side](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/python/forthright.md) - 2024-12-16
 * [Authenticating NetSuite with Python using Auth2.0 M2M Credentials](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/python/netsuite_auth_m2m.md) - 2024-12-20
+* [This is a test](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/python/test.md) - 2024-12-30
 
 ## tailscale
 
