@@ -28,7 +28,7 @@ jobs:
         cd main
         apt update -y
         apt install sshpass -y
-        sshpass -p "$MINI_PW" scp -o StrictHostKeyChecking=no ./tils.db jacob@mini.tailb54fb2.ts.net:/home/jacob/containers_enabled/Today_I_Learned/src/
+        sshpass -p "$MINI_PW" scp -o StrictHostKeyChecking=no ./tils.db jacob@mini.tailb54fb2.ts.net:/home/jacob/containers-enabled/Today_I_Learned/src
       env:
         MINI_PW: ${{ secrets.MINI_PW }}
 
