@@ -25,7 +25,7 @@ jobs:
 
     - name: Push to Server
       run: |
-        scp StrictHostKeyChecking=no ./tils.db jacob@mini:/home/jacob/containers_enabled/Today_I_Learned/src/
+        scp StrictHostKeyChecking=no ./tils.db jacob@mini.tailb54fb2.ts.net:/home/jacob/containers_enabled/Today_I_Learned/src/
 
     - name: Update README
       run: |
