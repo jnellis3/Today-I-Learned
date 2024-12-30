@@ -15,4 +15,5 @@
 ## tailscale
 
 * [Personal VPN with Tailscale](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/tailscale/tailscale_intro.md) - 2024-12-27
+* [Connecting Docker to Tailscale VPN](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/tailscale/ts_docker.md) - 2024-12-29
 <!-- index ends -->
