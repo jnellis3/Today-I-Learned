@@ -6,6 +6,7 @@
 ## github-actions
 
 * [Checkout a Repo with Full Branch History](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/checkout_full.md) - 2024-12-16
+* [Setting up Python in Gitea Actions](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/setup_python.md) - 2025-01-25
 
 ## python
 
