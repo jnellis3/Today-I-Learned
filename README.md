@@ -24,4 +24,8 @@
 
 * [Github Markdown API](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github/markdown.md) - 2025-01-08
 * [Bulk Update Remote Origin](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github/update_remote.md) - 2025-01-22
+
+## AWS
+
+* [Lightsail as an alternative to EC2](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AWS/lightsale.md) - 2025-03-16
 <!-- index ends -->
