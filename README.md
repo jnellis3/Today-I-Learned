@@ -28,4 +28,8 @@
 ## AWS
 
 * [Lightsail as an alternative to EC2](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AWS/lightsale.md) - 2025-03-16
+
+## auth
+
+* [Implementing OAuth2.0 Flow](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/auth/oauth_flow.md) - 2025-03-20
 <!-- index ends -->
