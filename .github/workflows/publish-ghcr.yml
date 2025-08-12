@@ -71,6 +71,24 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
+        - name: Sanity check auth
+        run: |
+          gcloud config list
+          gcloud auth list
+
+      - name: Clear any impersonation & select SA
+        run: |
+          # Clear any prior impersonation config that might be set in this runner
+          gcloud config unset auth/impersonate_service_account || true
+          # Point gcloud at the service account that the auth action just minted
+          SA_EMAIL=$(jq -r '.client_email' "$GOOGLE_GHA_CREDS_PATH")
+          echo "Using service account: $SA_EMAIL"
+          gcloud config set account "$SA_EMAIL"
+
+      - name: Verify access
+        run: |
+          gcloud run services list --region=us-central1 || (echo "Auth still not right" && exit 1)
+
       - name: Deploy to Cloud Run
         if: github.ref == 'refs/heads/main'
         run: |
