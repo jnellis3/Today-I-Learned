@@ -71,7 +71,7 @@ jobs:
       - name: Set up gcloud
         uses: google-github-actions/setup-gcloud@v2
 
-        - name: Sanity check auth
+      - name: Sanity check auth
         run: |
           gcloud config list
           gcloud auth list
