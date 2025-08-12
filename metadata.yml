@@ -10,7 +10,7 @@ plugins:
       latest:
         sql: |
           select title as title,
-                 '/tils/til/' || [path] as url,
+                 '/tils/til/' || replace([path], '.', '~2E') as url,
                  created_utc as datetime,
                  summary as summary
           from til

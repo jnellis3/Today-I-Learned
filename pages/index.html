@@ -33,10 +33,9 @@ title: Index
       <h3>{{ topic }}</h3>
       <ul>
       {% for r in rows %}
-        <li><a href="/tils/til/{{ r['path'] }}">{{ r.title }}</a> — {{ r.created.split('T')[0] }}</li>
+        <li><a href="/{{ database }}/til/{{ r['path']|replace('.', '~2E') }}">{{ r.title }}</a> — {{ r.created.split('T')[0] }}</li>
       {% endfor %}
       </ul>
     </section>
   {% endfor %}
 {% endblock %}
-

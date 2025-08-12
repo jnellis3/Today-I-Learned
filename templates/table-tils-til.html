@@ -6,13 +6,54 @@
   {# Determine primary key column to build correct row URLs #}
   {% set pk = (primary_keys[0] if (primary_keys and primary_keys|length>0) else 'path') %}
 
-  <form method="get" role="search" style="margin: 1rem 0; display: flex; gap: .5rem; align-items: center;">
+  <form id="search-form" method="get" role="search" style="margin: 1rem 0; display: flex; gap: .5rem; align-items: center;">
     <input type="search" name="_search" placeholder="Search title and body" value="{{ request.args.get('_search', '') }}" />
-    <input type="text" name="topic" placeholder="Filter by topic (exact)" value="{{ request.args.get('topic', '') }}" />
+    <select name="topic" id="topic-select">
+      <option value="" {% if not request.args.get('topic') %}selected{% endif %}>--ALL--</option>
+    </select>
     <input type="hidden" name="_sort_desc" value="created_utc" />
     <button type="submit">Apply</button>
     <a class="secondary" href="/{{ database }}/{{ table }}?_sort_desc=created_utc">Clear</a>
   </form>
+
+  <script>
+    // Prevent submitting empty _search/topic parameters to avoid FTS errors
+    (function () {
+      var form = document.getElementById('search-form');
+      if (!form) return;
+      form.addEventListener('submit', function () {
+        // Handle both inputs and selects
+        var searchEl = form.querySelector('input[name="_search"]');
+        if (searchEl && (!searchEl.value || searchEl.value.trim() === '')) {
+          searchEl.disabled = true;
+        }
+        var topicSel = form.querySelector('select[name="topic"]');
+        if (topicSel && (!topicSel.value || topicSel.value.trim() === '')) {
+          topicSel.disabled = true;
+        }
+      });
+    })();
+    // Populate topic dropdown from server to avoid Jinja async complications
+    (function () {
+      var select = document.getElementById('topic-select');
+      if (!select) return;
+      var params = new URLSearchParams(window.location.search);
+      var current = params.get('topic') || '';
+      var dbJsonUrl = '{{ urls.database(database, format="json") }}';
+      var sql = 'select distinct topic from til order by topic';
+      var url = dbJsonUrl + '?' + new URLSearchParams({ sql: sql, _shape: 'array' }).toString();
+      fetch(url).then(function (r) { return r.json(); }).then(function (rows) {
+        rows.forEach(function (r) {
+          if (!r.topic) return;
+          var opt = document.createElement('option');
+          opt.value = r.topic;
+          opt.textContent = r.topic;
+          if (r.topic === current) opt.selected = true;
+          select.appendChild(opt);
+        });
+      }).catch(function () { /* ignore */ });
+    })();
+  </script>
 
   <table>
     <thead>
@@ -23,7 +64,10 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in rows %}
+      {# Default to newest first unless an explicit sort is applied #}
+      {% set has_sort = request.args.get('_sort') or request.args.get('_sort_desc') %}
+      {% set display_rows = rows if has_sort else rows|sort(attribute='created_utc', reverse=true) %}
+      {% for row in display_rows %}
       <tr>
         {# Datasette expects tilde-encoding for PKs, e.g. '.' -> '~2E' #}
         <td><a href="/{{ database }}/{{ table }}/{{ row[pk]|replace('.', '~2E') }}">{{ row['title'] }}</a><br><small>{{ (row['summary'] or '')[:180] }}{% if row['summary'] and row['summary']|length > 180 %}…{% endif %}</small></td>

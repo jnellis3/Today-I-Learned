@@ -1,7 +1,17 @@
 {% extends "_base.html" %}
 {% block title %}{{ rows[0]['title'] }} - {{ metadata.title or 'TIL' }}{% endblock %}
 {% block content %}
-<article>
+<style>
+  /* Smaller, more readable typography for post page */
+  article.post { font-size: 0.95rem; line-height: 1.6; }
+  article.post h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+  article.post h2 { font-size: 1.25rem; }
+  article.post h3 { font-size: 1.1rem; }
+  article.post pre, article.post code { font-size: 0.9rem; }
+  .post-meta { font-size: 0.85rem; }
+  article.post p { margin-bottom: 0.9rem; }
+</style>
+<article class="post">
   <header>
     <h1>{{ rows[0]['title'] }}</h1>
     <p class="post-meta">Topic: <strong>{{ rows[0]['topic'] }}</strong> · Created: {{ rows[0]['created'].split('T')[0] }} · Updated: {{ rows[0]['updated'].split('T')[0] }}</p>
