@@ -38,4 +38,8 @@
 
 * [Today-I-Learned: Repo Overview](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/docs/repo-overview.md) - 2025-08-12
 * [Datasette: Patterns, Tips, and Gotchas](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/docs/datasette-notes.md) - 2025-08-12
+
+## google-cloud
+
+* [Setting up a Mirror Repository in Google Cloud](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/google-cloud/remote-repository.md) - 2025-08-12
 <!-- index ends -->
