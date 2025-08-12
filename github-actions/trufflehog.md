@@ -1,6 +1,6 @@
 # Trufflehog
 
-I've been reluctant to make some of my side-project repositories public out of fear that somewhere deep in my commit history I accidently committed a token. Fortunately, I found an open source software that can scan repos for keys and can be incorporated into the CI/CD pipeline.
+I've been reluctant to make some of my side-project repositories public out of fear that somewhere deep in my commit history I accidently committed a token. Fortunately, I found an open source software that can scan repos for keys and can be incorporated into the CI/CD pipeline. The below pipeline works with gitea.
 
 ```
 name: TruffleHog (Gitea)
