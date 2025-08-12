@@ -16,7 +16,7 @@
       <tr>
         <th>Title</th>
         <th>Topic</th>
-        <th><a href="?{{ url_json({'_sort_desc': 'created_utc'}, from_request=True) }}">Created</a></th>
+        <th><a href="?_sort_desc=created_utc">Created</a></th>
       </tr>
     </thead>
     <tbody>
@@ -40,4 +40,3 @@
   </div>
 
 {% endblock %}
-
