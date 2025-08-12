@@ -92,8 +92,11 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          IMAGE="us-central1-docker.pkg.dev/sqlite-deployments/today-i-learned/jnellis3/today-i-learned:sha-${SHORT_SHA}"
+          echo "Deploying $IMAGE"
           gcloud run deploy today-i-learned \
-            --image=us-central1-docker.pkg.dev/sqlite-deployments/today-i-learned/jnellis3/today-i-learned:sha-${{ github.sha::0:7 }} \
+            --image="$IMAGE" \
             --min-instances=0 \
             --max-instances=3 \
             --no-cpu-boost \
