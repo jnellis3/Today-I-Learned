@@ -9,6 +9,7 @@
 * [Setting up Python in Gitea Actions](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/setup_python.md) - 2025-01-25
 * [Performing Code and Website Scans](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/code_scans.md) - 2025-02-14
 * [Server Monitoring with Gitea Actions](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/server_monitoring_action.md) - 2025-02-25
+* [Trufflehog](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github-actions/trufflehog.md) - 2025-08-12
 
 ## python
 
