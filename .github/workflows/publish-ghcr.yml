@@ -88,15 +88,20 @@ jobs:
       - name: Verify access
         run: |
           gcloud run services list --region=us-central1 || (echo "Auth still not right" && exit 1)
+        
 
       - name: Deploy to Cloud Run
-        if: github.ref == 'refs/heads/main'
         run: |
           gcloud run deploy today-i-learned \
-          --image=us-central1-docker.pkg.dev/sqlite-deployments/today-i-learned/jnellis3/today-i-learned:sha-335729a \
-          --min-instances=0 \
-          --max-instances=3 \
-          --no-cpu-boost \
-          --region=us-central1 \
-          --project=sqlite-deployments \
-           && gcloud run services update-traffic today-i-learned --to-latest
+            --image=us-central1-docker.pkg.dev/sqlite-deployments/today-i-learned/jnellis3/today-i-learned:sha-${{ github.sha::0:7 }} \
+            --min-instances=0 \
+            --max-instances=3 \
+            --no-cpu-boost \
+            --region=us-central1 \
+            --project=sqlite-deployments \
+            --quiet
+          gcloud run services update-traffic today-i-learned \
+            --to-latest \
+            --region=us-central1 \
+            --project=sqlite-deployments \
+            --quiet
