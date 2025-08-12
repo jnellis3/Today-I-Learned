@@ -33,4 +33,9 @@
 
 * [Implementing OAuth2.0 Flow](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/auth/oauth_flow.md) - 2025-03-20
 * [Authenticating NetSuite with Python using Auth2.0 M2M Credentials](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/auth/netsuite_auth_m2m.md) - 2025-03-20
+
+## docs
+
+* [Today-I-Learned: Repo Overview](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/docs/repo-overview.md) - 2025-08-12
+* [Datasette: Patterns, Tips, and Gotchas](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/docs/datasette-notes.md) - 2025-08-12
 <!-- index ends -->
