@@ -19,4 +19,4 @@ COPY tils.db /app/tils.db
 
 EXPOSE 8000
 
-CMD ["datasette", "serve", "/app/tils.db", "--host", "0.0.0.0", "--port", "8000", "-m", "/app/metadata.yml"]
+CMD ["datasette", "serve", "/app/tils.db", "--host", "0.0.0.0", "--port", "8000", "-m", "/app/metadata.yml", "--template-dir", "/app/templates"]

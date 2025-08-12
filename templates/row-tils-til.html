@@ -1,17 +1,16 @@
 {% extends "_base.html" %}
-{% block title %}{{ row.title }} - {{ metadata.title or 'TIL' }}{% endblock %}
+{% block title %}{{ rows[0]['title'] }} - {{ metadata.title or 'TIL' }}{% endblock %}
 {% block content %}
 <article>
   <header>
-    <h1>{{ row.title }}</h1>
-    <p class="post-meta">Topic: <strong>{{ row.topic }}</strong> · Created: {{ row.created.split('T')[0] }} · Updated: {{ row.updated.split('T')[0] }}</p>
-    <p><a href="{{ row.url }}" target="_blank" rel="noopener">View source in Git</a></p>
+    <h1>{{ rows[0]['title'] }}</h1>
+    <p class="post-meta">Topic: <strong>{{ rows[0]['topic'] }}</strong> · Created: {{ rows[0]['created'].split('T')[0] }} · Updated: {{ rows[0]['updated'].split('T')[0] }}</p>
+    <p><a href="{{ rows[0]['url'] }}" target="_blank" rel="noopener">View source in Git</a></p>
   </header>
   <hr />
   <section>
-    {{ row.html | safe }}
+    {{ rows[0]['html'] | safe }}
   </section>
 </article>
 <p><a href="/tils/til?_sort_desc=created_utc">← Back to all posts</a></p>
 {% endblock %}
-

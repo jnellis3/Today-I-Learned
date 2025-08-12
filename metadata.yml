@@ -17,7 +17,7 @@ plugins:
           order by datetime(created_utc) desc
           limit 50
   datasette-template-sql:
-    pages_dir: /app/pages
+    pages_dir: pages
 databases:
   tils:
     tables:

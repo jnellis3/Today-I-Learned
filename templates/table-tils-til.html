@@ -3,6 +3,9 @@
 {% block content %}
   <h1>All Posts</h1>
 
+  {# Determine primary key column to build correct row URLs #}
+  {% set pk = (primary_keys[0] if (primary_keys and primary_keys|length>0) else 'path') %}
+
   <form method="get" role="search" style="margin: 1rem 0; display: flex; gap: .5rem; align-items: center;">
     <input type="search" name="_search" placeholder="Search title and body" value="{{ request.args.get('_search', '') }}" />
     <input type="text" name="topic" placeholder="Filter by topic (exact)" value="{{ request.args.get('topic', '') }}" />
@@ -22,7 +25,8 @@
     <tbody>
       {% for row in rows %}
       <tr>
-        <td><a href="/{{ database }}/{{ table }}/{{ row['path'] }}">{{ row['title'] }}</a><br><small>{{ (row['summary'] or '')[:180] }}{% if row['summary'] and row['summary']|length > 180 %}…{% endif %}</small></td>
+        {# Datasette expects tilde-encoding for PKs, e.g. '.' -> '~2E' #}
+        <td><a href="/{{ database }}/{{ table }}/{{ row[pk]|replace('.', '~2E') }}">{{ row['title'] }}</a><br><small>{{ (row['summary'] or '')[:180] }}{% if row['summary'] and row['summary']|length > 180 %}…{% endif %}</small></td>
         <td>{{ row['topic'] }}</td>
         <td>{{ row['created'].split('T')[0] }}</td>
       </tr>
