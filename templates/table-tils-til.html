@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% block title %}All Posts - {{ metadata.title or 'TIL' }}{% endblock %}
+{% block content %}
+  <h1>All Posts</h1>
+
+  <form method="get" role="search" style="margin: 1rem 0; display: flex; gap: .5rem; align-items: center;">
+    <input type="search" name="_search" placeholder="Search title and body" value="{{ request.args.get('_search', '') }}" />
+    <input type="text" name="topic" placeholder="Filter by topic (exact)" value="{{ request.args.get('topic', '') }}" />
+    <input type="hidden" name="_sort_desc" value="created_utc" />
+    <button type="submit">Apply</button>
+    <a class="secondary" href="/{{ database }}/{{ table }}?_sort_desc=created_utc">Clear</a>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Topic</th>
+        <th><a href="?{{ url_json({'_sort_desc': 'created_utc'}, from_request=True) }}">Created</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><a href="/{{ database }}/{{ table }}/{{ row['path'] }}">{{ row['title'] }}</a><br><small>{{ (row['summary'] or '')[:180] }}{% if row['summary'] and row['summary']|length > 180 %}…{% endif %}</small></td>
+        <td>{{ row['topic'] }}</td>
+        <td>{{ row['created'].split('T')[0] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div style="display:flex; justify-content: space-between; margin-top: 1rem;">
+    <span>
+      {% if previous_url %}<a href="{{ previous_url }}">← Newer</a>{% endif %}
+    </span>
+    <span>
+      {% if next_url %}<a href="{{ next_url }}">Older →</a>{% endif %}
+    </span>
+  </div>
+
+{% endblock %}
+

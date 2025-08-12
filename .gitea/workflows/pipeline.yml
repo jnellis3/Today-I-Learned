@@ -15,7 +15,6 @@ jobs:
         path: main
 
     - name: Build Database
-      continue-on-error: true
       run: |
         cd main
         python3 -m venv .venv
@@ -33,3 +32,24 @@ jobs:
         git add README.md
         git commit -m 'AUTOMATED: Update README'
         git push
+
+    - name: Build and Push Docker Image
+      env:
+        REGISTRY: ${{ secrets.REGISTRY }}
+        REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+        REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+      run: |
+        cd main
+        if [ ! -f "tils.db" ]; then
+          echo "tils.db not found; did the DB step succeed?" >&2
+          exit 1
+        fi
+        if [ -z "$REGISTRY" ] || [ -z "$REGISTRY_USERNAME" ] || [ -z "$REGISTRY_PASSWORD" ] || [ -z "$IMAGE_NAME" ]; then
+          echo "Registry settings missing. Define REGISTRY, REGISTRY_USERNAME, REGISTRY_PASSWORD, IMAGE_NAME secrets." >&2
+          exit 1
+        fi
+        echo "Logging into container registry $REGISTRY"
+        echo "$REGISTRY_PASSWORD" | docker login "$REGISTRY" -u "$REGISTRY_USERNAME" --password-stdin
+        docker build -t "$IMAGE_NAME" .
+        docker push "$IMAGE_NAME"

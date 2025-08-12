@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# VCS
+.git/
+.gitignore
+
+# CI artifacts
+.gitea/
+
+# OS
+.DS_Store
+
+# We only need the database and app files
+*
+!metadata.yml
+!Dockerfile
+!requirements.txt
+!templates/**
+!pages/**
+!tils.db

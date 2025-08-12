@@ -1,0 +1,42 @@
+---
+title: Index
+---
+{% extends "_base.html" %}
+{% block title %}Index - {{ metadata.title or 'TIL' }}{% endblock %}
+{% block content %}
+  <h2>Topics</h2>
+  {% sql %}
+  select topic, count(*) as count
+  from til
+  group by topic
+  order by lower(topic)
+  {% endsql %}
+  <ul>
+  {% for row in sql_rows %}
+    <li><a href="#{{ row.topic }}">{{ row.topic }}</a> ({{ row.count }})</li>
+  {% endfor %}
+  </ul>
+
+  {% sql %}
+  select topic, title, [path], created
+  from til
+  order by topic, datetime(created) desc
+  {% endsql %}
+
+  {% set by_topic = {} %}
+  {% for row in sql_rows %}
+    {% set _ = by_topic.setdefault(row.topic, []).append(row) %}
+  {% endfor %}
+
+  {% for topic, rows in by_topic.items() %}
+    <section id="{{ topic }}">
+      <h3>{{ topic }}</h3>
+      <ul>
+      {% for r in rows %}
+        <li><a href="/tils/til/{{ r['path'] }}">{{ r.title }}</a> — {{ r.created.split('T')[0] }}</li>
+      {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,30 @@
+title: Today I Learned
+description: A TIL blog powered by Datasette
+about: |
+  Personal notes and snippets, published from Markdown via a generated SQLite database.
+plugins:
+  datasette-atom:
+    title: Today I Learned
+    url: /-/atom
+    queries:
+      latest:
+        sql: |
+          select title as title,
+                 '/tils/til/' || [path] as url,
+                 created_utc as datetime,
+                 summary as summary
+          from til
+          order by datetime(created_utc) desc
+          limit 50
+  datasette-template-sql:
+    pages_dir: /app/pages
+databases:
+  tils:
+    tables:
+      til:
+        label_column: title
+        description_html: |
+          Posts imported from Markdown. Click a title to view the full entry.
+metadata_license: CC-BY-4.0
+source: Today-I-Learned
+source_url: https://git.gvoserver1.com/jnellis/Today-I-Learned
