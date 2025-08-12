@@ -60,3 +60,14 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Deploy to Cloud Run
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gcloud run deploy today-i-learned \
+          --image=us-central1-docker.pkg.dev/sqlite-deployments/today-i-learned/jnellis3/today-i-learned:sha-335729a \
+          --min-instances=0 \
+          --max-instances=3 \
+          --no-cpu-boost \
+          --region=us-central1 \
+          --project=sqlite-deployments \
+           && gcloud run services update-traffic today-i-learned --to-latest
