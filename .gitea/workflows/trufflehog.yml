@@ -1,0 +1,71 @@
+name: TruffleHog (Gitea)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_history:
+        description: "Scan ALL commits in repo history (true/false)"
+        required: false
+        default: "false"
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: https://github.com/actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Debug workspace
+        run: |
+          echo "workspace=${{ github.workspace }}"
+          pwd
+          git rev-parse --is-inside-work-tree
+          git log -1 --oneline
+
+      - name: Install TruffleHog
+        run: |
+          curl -sSL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh \
+            | sh -s -- -b /usr/local/bin
+          trufflehog --version
+
+      # Fast path: scan only what's new on pushes using the 'before' SHA (if present)
+      - name: TruffleHog (push diff)
+        if: ${{ github.event_name == 'push' && github.event.before != '' && (github.event.inputs.full_history != 'true') }}
+        run: |
+          echo "Scanning diff since ${{ github.event.before }}"
+          trufflehog git file://$(pwd) \
+            --since-commit "${{ github.event.before }}" \
+            --fail-verified
+
+      # PR path: scan base..head
+      - name: TruffleHog (PR diff)
+        if: ${{ github.event_name == 'pull_request' && (github.event.inputs.full_history != 'true') }}
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          echo "Scanning PR range $BASE..$HEAD"
+          # Limit objects to that range for speed
+          git fetch --no-tags --depth=0 origin ${BASE} ${HEAD}
+          trufflehog git file://$(pwd) \
+            --since-commit "$BASE" \
+            --branch "$HEAD" \
+            --fail-verified
+
+      # Manual full-history scan
+      - name: TruffleHog (full history)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.full_history == 'true' }}
+        run: |
+          trufflehog git file://$(pwd) --results=verified,unknown --json > trufflehog.json
+
+      - name: Upload report
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.full_history == 'true' }}
+        uses: actions/upload-artifact@v3   # ⬅️ v3, not v4
+        with:
+          name: trufflehog-report
+          path: trufflehog.json
+          retention-days: 30
