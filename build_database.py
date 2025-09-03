@@ -43,7 +43,10 @@ def build_database(repo_path):
     all_times = created_changed_times(repo_path)
     db = sqlite_utils.Database(repo_path / "tils.db")
     table = db.table("til", pk="path")
-    for filepath in root.glob("*/*.md"):
+    # Recursively include markdown in any subfolder; skip root-level files like README.md
+    for filepath in root.rglob("*.md"):
+        if filepath.parent == root:
+            continue
         fp = filepath.open()
         title = fp.readline().lstrip("#").strip()
         body = fp.read().strip()

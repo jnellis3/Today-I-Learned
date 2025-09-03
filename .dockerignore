@@ -13,11 +13,21 @@ __pycache__/
 # OS
 .DS_Store
 
-# We only need the database and app files
+# Only send what’s needed to build the DB and run the app
 *
-!metadata.yml
+!*/
 !Dockerfile
+!requirements.txt
 !requirements.web.txt
+!build_database.py
+!.git
+!.git/**
+!metadata.yml
 !templates/**
 !pages/**
-!tils.db
+# Include all Markdown files anywhere in the tree
+!*.md
+!**/*.md
+# Do not include a prebuilt DB from the host
+# (DB is built inside the image in the builder stage)
+# tils.db
