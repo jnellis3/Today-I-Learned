@@ -14,14 +14,6 @@ jobs:
         fetch-depth: 0
         path: main
 
-    - name: Build Database
-      run: |
-        cd main
-        python3 -m venv .venv
-        source ./.venv/bin/activate
-        pip install -r requirements.txt
-        python3 build_database.py
-
     - name: Build and Push Docker Image
       env:
         REGISTRY: ${{ secrets.REGISTRY }}
