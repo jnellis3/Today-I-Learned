@@ -1,4 +1,4 @@
-# Google Cloud Build & Deploy with Cloud Run via Remote Repo
+# Google Cloud Build and Deploy
 
 Google Cloud Run allows you to build and deploy containerized applications directly from a remote repository (such as GitHub or Bitbucket) using Google Cloud Build and CI/CD pipelines. Here’s a summary of the process:
 
