@@ -9,9 +9,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /build
 
+# Install git for GitPython to read commit history
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
 # Optional: pass a token to avoid GitHub Markdown API rate limits
 ARG MARKDOWN_GITHUB_TOKEN
-ENV MARKDOWN_GITHUB_TOKEN=${MARKDOWN_GITHUB_TOKEN}
 
 # Install build-time dependencies to render markdown and build the DB
 COPY requirements.txt /build/requirements.txt
