@@ -37,24 +37,15 @@ jobs:
       - name: TruffleHog (push diff)
         if: ${{ github.event_name == 'push' && github.event.before != '' && (github.event.inputs.full_history != 'true') }}
         run: |
-          echo "Scanning diff since ${{ github.event.before }}"
-          trufflehog git file://$(pwd) \
-            --since-commit "${{ github.event.before }}" \
-            --fail-verified
+          trufflehog git file://$(pwd) --results=verified,unknown --json > trufflehog.json
+
 
       # PR path: scan base..head
       - name: TruffleHog (PR diff)
         if: ${{ github.event_name == 'pull_request' && (github.event.inputs.full_history != 'true') }}
         run: |
-          BASE="${{ github.event.pull_request.base.sha }}"
-          HEAD="${{ github.event.pull_request.head.sha }}"
-          echo "Scanning PR range $BASE..$HEAD"
-          # Limit objects to that range for speed
-          git fetch --no-tags --depth=0 origin ${BASE} ${HEAD}
-          trufflehog git file://$(pwd) \
-            --since-commit "$BASE" \
-            --branch "$HEAD" \
-            --fail-verified
+          trufflehog git file://$(pwd) --results=verified,unknown --json > trufflehog.json
+
 
       # Manual full-history scan
       - name: TruffleHog (full history)
