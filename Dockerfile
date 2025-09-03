@@ -14,19 +14,23 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends git \
     && rm -rf /var/lib/apt/lists/*
 
+## Clone the public repo so full git history is available during build
+ARG REPO_URL=https://github.com/jnellis3/Today-I-Learned.git
+ARG GIT_REF=
+RUN git clone --recursive ${REPO_URL} /repo \
+    && if [ -n "${GIT_REF}" ]; then git -C /repo checkout "${GIT_REF}"; fi \
+    && git -C /repo config --global --add safe.directory /repo
+
 # Optional: pass a token to avoid GitHub Markdown API rate limits
 ARG MARKDOWN_GITHUB_TOKEN
+ENV MARKDOWN_GITHUB_TOKEN=${MARKDOWN_GITHUB_TOKEN}
 
 # Install build-time dependencies to render markdown and build the DB
-COPY requirements.txt /build/requirements.txt
 RUN pip install --upgrade pip \
-    && pip install -r /build/requirements.txt
-
-# Copy the full (filtered) context: .git + markdown + build script
-COPY . /build
+    && pip install -r /repo/requirements.txt
 
 # Build the SQLite database inside the image
-RUN python /build/build_database.py
+RUN python /repo/build_database.py
 
 ############
 # Runtime  #
@@ -40,17 +44,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # Install only the runtime dependencies needed to serve the site
-COPY requirements.web.txt /app/requirements.web.txt
+COPY --from=builder /repo/requirements.web.txt /app/requirements.web.txt
 RUN pip install --upgrade pip \
     && pip install -r /app/requirements.web.txt
 
 # Copy app assets
-COPY metadata.yml /app/metadata.yml
-COPY templates /app/templates
-COPY pages /app/pages
+COPY --from=builder /repo/metadata.yml /app/metadata.yml
+COPY --from=builder /repo/templates /app/templates
+COPY --from=builder /repo/pages /app/pages
 
 # Copy built database from builder stage
-COPY --from=builder /build/tils.db /app/tils.db
+COPY --from=builder /repo/tils.db /app/tils.db
 
 EXPOSE 8000
 
