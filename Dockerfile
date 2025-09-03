@@ -21,9 +21,6 @@ RUN git clone --recursive ${REPO_URL} /repo \
     && if [ -n "${GIT_REF}" ]; then git -C /repo checkout "${GIT_REF}"; fi \
     && git -C /repo config --global --add safe.directory /repo
 
-# Optional: pass a token to avoid GitHub Markdown API rate limits
-ARG MARKDOWN_GITHUB_TOKEN
-ENV MARKDOWN_GITHUB_TOKEN=${MARKDOWN_GITHUB_TOKEN}
 
 # Install build-time dependencies to render markdown and build the DB
 RUN pip install --upgrade pip \
