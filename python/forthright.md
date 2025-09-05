@@ -1,6 +1,6 @@
 # Forthright: Seemingly call Server Functions Client Side
 
-A friend on mine introduced me to a new python package he create called [forthwright](https://github.com/mariusfacktor/forthright/tree/main). This is a Flask wrapper that allows you to wrap functions on the server for execution on the client.
+A friend of mine introduced me to a new python package he created called [forthwright](https://github.com/mariusfacktor/forthright/tree/main). This is a Flask wrapper that allows you to wrap functions on the server for execution on the client.
 
 It works by serializing the arguments before sending to the server (therefor you can only pass by value) and then unserializing on the server using pickle.
 
