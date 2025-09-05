@@ -37,14 +37,3 @@ jobs:
         echo "Building image: $FULL_IMAGE"
         docker build -t "$FULL_IMAGE" .
         docker push "$FULL_IMAGE"
-
-    - name: Update README
-      run: |
-        cd main
-        source ./.venv/bin/activate
-        python3 update_readme.py > README.md
-        git config user.email "jacob.stephen.nellis@gmail.com"
-        git config user.name "README-Updater-BOT"
-        git add README.md
-        git commit -m 'AUTOMATED: Update README'
-        git push
