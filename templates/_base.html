@@ -15,12 +15,10 @@
   <body>
     <nav class="container-fluid">
       <ul>
-        <li class="brand"><a href="/">{{ metadata.title or 'Today I Learned' }}</a></li>
+        <li class="brand"><a href="/tils/til">{{ metadata.title or 'Today I Learned' }}</a></li>
       </ul>
       <ul>
-        <li><a href="{{ urls.path('/-/pages/index') }}">Index</a></li>
         <li><a href="/tils/til?_sort_desc=created_utc">All Posts</a></li>
-        <li><a href="{{ urls.path('/-/atom/latest.xml') }}">Feed</a></li>
       </ul>
     </nav>
     <main class="container">
