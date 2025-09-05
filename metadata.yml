@@ -1,4 +1,4 @@
-title: Today I Learned
+title: Today Jacob Learned
 description: A TIL blog powered by Datasette
 about: |
   Personal notes and snippets, published from Markdown via a generated SQLite database.
