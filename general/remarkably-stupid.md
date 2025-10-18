@@ -29,3 +29,7 @@ In order to do this, I'll need to build a custom pogo connector for the device, 
 I've ordered the parts and now will just need to solder together the custom connector.
 
 [Recovery Guide](https://github.com/ddvk/remarkable2-recovery)
+
+### Results
+
+I never really got the recorvery guide to work for me. I have all the parts and it's nice knowing that if I really want to in the future I'll be able to recover it, but for now, it will remain in my sock drawer.
