@@ -39,4 +39,4 @@ Whether you're a seasoned NetSuite developer or just starting your SuiteScript j
 
 ## Pricing
 
-The best part? SuiteCloud Developer Assistant is available at no cost to customers as of December 16, 2024. This makes it an accessible tool for all NetSuite developers looking to enhance their productivity and code quality.
+The best part? SuiteCloud Developer Assistant is available at no cost to customers as of December 16, 2025. This makes it an accessible tool for all NetSuite developers looking to enhance their productivity and code quality.
