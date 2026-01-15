@@ -42,4 +42,10 @@
 ## google-cloud
 
 * [Setting up a Mirror Repository in Google Cloud](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/google-cloud/remote-repository.md) - 2025-08-12
+
+## AI
+
+* [DHH is Starting to Promote Vibe Coding](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/dhh_post.md) - 2026-01-14
+* [Ralph Wiggum Method for Coding Agents](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/ralph_wiggum_method.md) - 2026-01-15
+* [Using Claude Code in a CLI Pipeline](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/claude_cli_pipeline.md) - 2026-01-15
 <!-- index ends -->
