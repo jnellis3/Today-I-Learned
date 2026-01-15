@@ -1,0 +1,52 @@
+name: Ralph Agent
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  ralph:
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@ralph')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@ralph'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN_GITEA }}
+
+      - name: Clone Ralph action
+        run: |
+          git clone https://oauth2:${{ secrets.TOKEN_GITEA }}@git.gvoserver1.com/jnellis/Ralph.git /tmp/ralph-action
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+
+      - name: Install action dependencies
+        run: pip install requests gitpython pyyaml
+
+      - name: Set up Codex auth
+        run: |
+          mkdir -p ~/.codex
+          echo '${{ secrets.CODEX_AUTH_JSON }}' > ~/.codex/auth.json
+          chmod 600 ~/.codex/auth.json
+
+      - name: Run Ralph action
+        env:
+          GITEA_TOKEN: ${{ secrets.TOKEN_GITEA }}
+          CODEX_TIMEOUT: '30'
+        run: python /tmp/ralph-action/action/run.py
