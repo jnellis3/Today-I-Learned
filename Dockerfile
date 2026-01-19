@@ -49,10 +49,11 @@ RUN pip install --upgrade pip \
 COPY --from=builder /repo/metadata.yml /app/metadata.yml
 COPY --from=builder /repo/templates /app/templates
 COPY --from=builder /repo/pages /app/pages
+COPY --from=builder /repo/plugins /app/plugins
 
 # Copy built database from builder stage
 COPY --from=builder /repo/tils.db /app/tils.db
 
 EXPOSE 8000
 
-CMD ["datasette", "serve", "/app/tils.db", "--host", "0.0.0.0", "--port", "8000", "-m", "/app/metadata.yml", "--template-dir", "/app/templates"]
+CMD ["datasette", "serve", "/app/tils.db", "--host", "0.0.0.0", "--port", "8000", "-m", "/app/metadata.yml", "--template-dir", "/app/templates", "--plugins-dir", "/app/plugins"]
