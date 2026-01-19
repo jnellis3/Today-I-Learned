@@ -5,7 +5,16 @@
     <title>{{ (metadata.title or "Today I Learned")|e }}</title>
     <link>{{ (metadata.source_url or "")|e }}</link>
     <description>{{ (metadata.description or "")|e }}</description>
-    {% for row in sql("select title, summary, created_utc, '/tils/til/' || replace([path], '.', '~2E') as url from til order by datetime(created_utc) desc limit 50") %}
+    {% sql %}
+    select title,
+           summary,
+           created_utc,
+           '/tils/til/' || replace([path], '.', '~2E') as url
+    from til
+    order by datetime(created_utc) desc
+    limit 50
+    {% endsql %}
+    {% for row in sql_rows %}
     <item>
       <title>{{ row.title|e }}</title>
       <link>{{ row.url|e }}</link>
