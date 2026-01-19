@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ (metadata.title or "Today I Learned")|e }}</title>
+    <link>{{ (metadata.source_url or "")|e }}</link>
+    <description>{{ (metadata.description or "")|e }}</description>
+    {% sql %}
+    select title,
+           summary,
+           created_utc,
+           '/tils/til/' || replace([path], '.', '~2E') as url
+    from til
+    order by datetime(created_utc) desc
+    limit 50
+    {% endsql %}
+    {% for row in sql_rows %}
+    <item>
+      <title>{{ row.title|e }}</title>
+      <link>{{ row.url|e }}</link>
+      <guid>{{ row.url|e }}</guid>
+      <pubDate>{{ row.created_utc|e }}</pubDate>
+      <description>{{ row.summary|e }}</description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
