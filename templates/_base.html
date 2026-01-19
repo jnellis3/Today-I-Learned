@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ metadata.title or database }}{% endblock %}</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/-/pages/rss.xml">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <style>
       main { max-width: 900px; margin: 2rem auto; }
@@ -19,6 +20,7 @@
       </ul>
       <ul>
         <li><a href="/tils/til?_sort_desc=created_utc">All Posts</a></li>
+        <li><a href="/-/pages/rss.xml">RSS</a></li>
       </ul>
     </nav>
     <main class="container">
