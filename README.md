@@ -50,4 +50,8 @@
 * [Ralph Wiggum Method for Coding Agents](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/ralph_wiggum_method.md) - 2026-01-15
 * [Using Claude Code in a CLI Pipeline](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/claude_cli_pipeline.md) - 2026-01-15
 * [AGENTS.md for Coding Agents](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/AI/agents_md.md) - 2026-01-21
+
+## home-assistant
+
+* [Home Assistant Automations Work Best When Sensors Represent Events](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/home-assistant/event_sensors.md) - 2026-06-21
 <!-- index ends -->
