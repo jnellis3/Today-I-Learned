@@ -24,6 +24,7 @@
 
 * [Github Markdown API](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github/markdown.md) - 2025-01-08
 * [Bulk Update Remote Origin](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github/update_remote.md) - 2025-01-22
+* [Git Ignore Rules Can Live Outside .gitignore](https://git.gvoserver1.com/jnellis/Today-I-Learned/src/branch/main/github/git_ignore_levels.md) - 2026-06-21
 
 ## AWS
 
